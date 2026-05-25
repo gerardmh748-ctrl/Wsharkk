@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MueblesPremium - Muebles de Diseño Moderno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #2c3e50 0%, #3d5a80 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .comparison-btn {
+            position: relative;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .comparison-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .comparison-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3d5a80 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* FILTROS */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* GRID DE MUEBLES */
+        .furniture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .furniture-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .furniture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .furniture-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .furniture-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .furniture-info {
+            padding: 1.5rem;
+        }
+
+        .furniture-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .furniture-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .furniture-price {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .furniture-colors {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-option:hover {
+            border-color: #2c3e50;
+            transform: scale(1.1);
+        }
+
+        .color-negro { background: #000; }
+        .color-blanco { background: #fff; border-color: #ddd; }
+        .color-gris { background: #999; }
+        .color-madera { background: #8B4513; }
+        .color-azul { background: #3498db; }
+
+        .furniture-footer {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-compare {
+            flex: 1;
+            padding: 0.8rem;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-compare:hover {
+            opacity: 0.8;
+        }
+
+        .btn-quote {
+            flex: 1;
+            padding: 0.8rem;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-quote:hover {
+            opacity: 0.8;
+        }
+
+        /* MODAL COMPARADOR */
+        .comparison-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .comparison-modal.active {
+            display: block;
+        }
+
+        .comparison-content {
+            background: white;
+            width: 95%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .comparison-item-column {
+            min-width: 200px;
+        }
+
+        /* MODAL COTIZACIÓN */
+        .quote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quote-modal.active {
+            display: flex;
+        }
+
+        .quote-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            animation: slideDown 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .quote-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .quote-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .furniture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="location.href='index.html'">🛋️ MueblesPremium</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Muebles</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="index.html" style="background: white; color: #1e3a8a; padding: 0.5rem 1rem; border-radius: 5px; font-weight: bold;">← Volver</a></li>
+            </ul>
+            <div class="comparison-btn" onclick="toggleComparison()">
+                📊
+                <span class="comparison-count" id="comparisonCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>🛋️ Muebles Premium de Diseño Moderno</h1>
+        <p>Transforma tu hogar con nuestra colección de muebles exclusivos y funcionales</p>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <label for="categoryFilter">Categoría:</label>
+                <select id="categoryFilter" onchange="filtrarMuebles()">
+                    <option value="">Todos</option>
+                    <option value="sofas">Sofás</option>
+                    <option value="sillas">Sillas</option>
+                    <option value="mesas">Mesas</option>
+                    <option value="armarios">Armarios</option>
+                    <option value="camas">Camas</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="materialFilter">Material:</label>
+                <select id="materialFilter" onchange="filtrarMuebles()">
+                    <option value="">Todos</option>
+                    <option value="madera">Madera</option>
+                    <option value="metal">Metal</option>
+                    <option value="tela">Tela</option>
+                    <option value="cuero">Cuero</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- GRID DE MUEBLES -->
+        <div class="furniture-grid" id="furnitureGrid"></div>
+    </div>
+
+    <!-- MODAL COMPARADOR -->
+    <div class="comparison-modal" id="comparisonModal">
+        <div class="comparison-content">
+            <div class="comparison-header">
+                <h2>Comparar Muebles</h2>
+                <button class="close-btn" onclick="toggleComparison()">✕</button>
+            </div>
+            <table class="comparison-table" id="comparisonTable">
+                <thead>
+                    <tr id="comparisonTableHead">
+                        <th>Características</th>
+                    </tr>
+                </thead>
+                <tbody id="comparisonTableBody">
+                </tbody>
+            </table>
+            <button onclick="limpiarComparacion()" style="padding: 0.8rem 1.5rem; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">Limpiar Comparación</button>
+        </div>
+    </div>
+
+    <!-- MODAL COTIZACIÓN -->
+    <div class="quote-modal" id="quoteModal">
+        <div class="quote-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2>Solicitar Cotización</h2>
+                <button class="close-btn" onclick="toggleQuote()">✕</button>
+            </div>
+            <form onsubmit="enviarCotizacion(event)">
+                <div class="form-group">
+                    <label>Mueble Seleccionado:</label>
+                    <input type="text" id="selectedFurniture" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje Adicional</label>
+                    <textarea id="mensaje" placeholder="Comparte tus requisitos específicos..."></textarea>
+                </div>
+                <button type="submit" class="quote-submit">Enviar Cotización</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="index-demo.html" class="back-link">← Volver a Demos</a>
+        <p>&copy; 2024 MueblesPremium. Todos los derechos reservados.</p>
+        <p>📞 +34 932 000 000 | 📧 info@mueblespremium.com | 📍 Barcelona, España</p>
+    </footer>
+
+    <script>
+        // DATOS DE MUEBLES
+        const muebles = [
+            { id: 1, nombre: "Sofá Moderno 3 Cuerpos", precio: 1299.99, categoria: "sofas", material: "tela", imagen: "🛋️", colores: ["negro", "gris", "azul"], desc: "Diseño contemporáneo con patas de metal" },
+            { id: 2, nombre: "Silla de Diseño Eames", precio: 349.99, categoria: "sillas", material: "metal", imagen: "🪑", colores: ["negro", "blanco", "gris"], desc: "Réplica de diseño clásico" },
+            { id: 3, nombre: "Mesa de Centro de Madera", precio: 299.99, categoria: "mesas", material: "madera", imagen: "🪵", colores: ["madera", "negro"], desc: "Madera maciza de roble", new: true },
+            { id: 4, nombre: "Armario Empotrado", precio: 899.99, categoria: "armarios", material: "madera", imagen: "🚪", colores: ["blanco", "madera"], desc: "Capacidad: 4 m³" },
+            { id: 5, nombre: "Cama King Size", precio: 1599.99, categoria: "camas", material: "madera", imagen: "🛏️", colores: ["madera", "blanco"], desc: "180x200 cm con respaldo acolchado" },
+            { id: 6, nombre: "Sofá Cama Convertible", precio: 649.99, categoria: "sofas", material: "tela", imagen: "🛋️", colores: ["gris", "marrón"], desc: "Función sofá y cama", new: true },
+            { id: 7, nombre: "Escritorio Minimalista", precio: 399.99, categoria: "mesas", material: "metal", imagen: "📝", colores: ["blanco", "negro"], desc: "120x60 cm, superficie laminada" },
+            { id: 8, nombre: "Estantería Modular", precio: 549.99, categoria: "armarios", material: "madera", imagen: "📚", colores: ["blanco", "madera"], desc: "5 niveles ajustables" },
+            { id: 9, nombre: "Silla de Oficina Premium", precio: 599.99, categoria: "sillas", material: "cuero", imagen: "💺", colores: ["negro", "marrón"], desc: "Ergonómica con soporte lumbar", new: true },
+            { id: 10, nombre: "Mueble TV Flotante", precio: 799.99, categoria: "armarios", material: "madera", imagen: "📺", colores: ["blanco", "madera"], desc: "Con compartimientos de almacenaje" },
+            { id: 11, nombre: "Banco de Espera", precio: 199.99, categoria: "sillas", material: "metal", imagen: "🪑", colores: ["negro", "gris"], desc: "Estructura de acero con tapizado" },
+            { id: 12, nombre: "Consola Decorativa", precio: 249.99, categoria: "mesas", material: "madera", imagen: "🪵", colores: ["madera", "negro"], desc: "Ideal para pasillos y entradas" },
+        ];
+
+        let mueblesFiltrados = [...muebles];
+        let comparacion = [];
+        let furnitureSeleccionado = null;
+
+        const coloresMap = {
+            negro: '#000',
+            blanco: '#fff',
+            gris: '#999',
+            madera: '#8B4513',
+            azul: '#3498db',
+            marrón: '#8B6914'
+        };
+
+        // RENDERIZAR MUEBLES
+        function renderizarMuebles(mueblesToShow) {
+            const grid = document.getElementById('furnitureGrid');
+            grid.innerHTML = mueblesToShow.map(mueble => `
+                <div class="furniture-card">
+                    <div class="furniture-image">
+                        ${mueble.imagen}
+                        ${mueble.new ? '<span class="furniture-new">NUEVO</span>' : ''}
+                    </div>
+                    <div class="furniture-info">
+                        <div class="furniture-name">${mueble.nombre}</div>
+                        <div class="furniture-description">${mueble.desc}</div>
+                        <div class="furniture-colors">
+                            ${mueble.colores.map(color => 
+                                `<div class="color-option color-${color}" title="${color}" onclick="alert('Color: ${color}')"></div>`
+                            ).join('')}
+                        </div>
+                        <div class="furniture-price">€${mueble.precio.toFixed(2)}</div>
+                        <div class="furniture-footer">
+                            <button class="btn-compare" onclick="agregarAComparacion(${mueble.id})">Comparar</button>
+                            <button class="btn-quote" onclick="abrirCotizacion(${mueble.id})">Cotizar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // AGREGAR A COMPARACIÓN
+        function agregarAComparacion(id) {
+            const mueble = muebles.find(m => m.id === id);
+            const existe = comparacion.find(c => c.id === id);
+            
+            if (existe) {
+                comparacion = comparacion.filter(c => c.id !== id);
+            } else {
+                if (comparacion.length >= 4) {
+                    alert('Máximo 4 muebles para comparar');
+                    return;
+                }
+                comparacion.push(mueble);
+            }
+            
+            actualizarComparacion();
+        }
+
+        // ACTUALIZAR COMPARACIÓN
+        function actualizarComparacion() {
+            document.getElementById('comparisonCount').textContent = comparacion.length;
+            
+            if (comparacion.length === 0) return;
+            
+            let headHtml = '<th class="comparison-item-column">Características</th>';
+            comparacion.forEach(m => {
+                headHtml += `<th class="comparison-item-column">${m.nombre}</th>`;
+            });
+            document.getElementById('comparisonTableHead').innerHTML = headHtml;
+            
+            let bodyHtml = `
+                <tr>
+                    <td><strong>Precio</strong></td>
+                    ${comparacion.map(m => `<td>€${m.precio.toFixed(2)}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td><strong>Categoría</strong></td>
+                    ${comparacion.map(m => `<td>${m.categoria}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td><strong>Material</strong></td>
+                    ${comparacion.map(m => `<td>${m.material}</td>`).join('')}
+                </tr>
+                <tr>
+                    <td><strong>Colores</strong></td>
+                    ${comparacion.map(m => `<td>${m.colores.join(', ')}</td>`).join('')}
+                </tr>
+            `;
+            document.getElementById('comparisonTableBody').innerHTML = bodyHtml;
+        }
+
+        // LIMPIAR COMPARACIÓN
+        function limpiarComparacion() {
+            comparacion = [];
+            actualizarComparacion();
+            toggleComparison();
+        }
+
+        // TOGGLE COMPARACIÓN
+        function toggleComparison() {
+            document.getElementById('comparisonModal').classList.toggle('active');
+        }
+
+        // ABRIR COTIZACIÓN
+        function abrirCotizacion(id) {
+            furnitureSeleccionado = muebles.find(m => m.id === id);
+            document.getElementById('selectedFurniture').value = furnitureSeleccionado.nombre;
+            toggleQuote();
+        }
+
+        // TOGGLE COTIZACIÓN
+        function toggleQuote() {
+            document.getElementById('quoteModal').classList.toggle('active');
+        }
+
+        // ENVIAR COTIZACIÓN
+        function enviarCotizacion(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const cantidad = document.getElementById('cantidad').value;
+            
+            alert(`¡Cotización enviada! 📧\n\nNos pondremos en contacto pronto a ${email}`);
+            toggleQuote();
+            document.querySelector('form').reset();
+        }
+
+        // FILTRAR MUEBLES
+        function filtrarMuebles() {
+            const category = document.getElementById('categoryFilter').value;
+            const material = document.getElementById('materialFilter').value;
+            
+            mueblesFiltrados = muebles.filter(m => 
+                (category === '' || m.categoria === category) &&
+                (material === '' || m.material === material)
+            );
+            
+            renderizarMuebles(mueblesFiltrados);
+        }
+
+        // INICIALIZAR
+        renderizarMuebles(muebles);
+    </script>
+</body>
+</html>

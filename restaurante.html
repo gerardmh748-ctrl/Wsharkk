@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante LaVida - Cocina Moderna y Sabrosa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        .order-btn {
+            position: relative;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .order-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FFD700;
+            color: #8B0000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn.active {
+            color: #DC143C;
+            border-bottom-color: #DC143C;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* MENÚ */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+        }
+
+        .menu-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .menu-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .menu-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .menu-price {
+            font-size: 1.5rem;
+            color: #DC143C;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .menu-footer {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-add-order {
+            flex: 1;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-add-order:hover {
+            opacity: 0.9;
+        }
+
+        /* RESERVAS */
+        .reservation-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-reserve {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-reserve:hover {
+            opacity: 0.9;
+        }
+
+        /* CARRITO MODAL */
+        .order-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: flex-end;
+        }
+
+        .order-modal.active {
+            display: flex;
+        }
+
+        .order-content {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .order-items {
+            flex: 1;
+            margin-bottom: 2rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item-name {
+            font-weight: 600;
+        }
+
+        .order-item-price {
+            color: #DC143C;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .checkout-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: #DC143C;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-info {
+                gap: 1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+                gap: 0;
+                margin-bottom: 0;
+            }
+
+            .tab-btn {
+                flex: 1;
+                border-bottom: none;
+                border-bottom-color: transparent;
+                margin-bottom: 0;
+            }
+
+            .order-content {
+                max-width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="location.href='index.html'">🍽️ LaVida</div>
+            <ul class="nav-menu">
+                <li><a onclick="activateTab('menu')">Menú</a></li>
+                <li><a onclick="activateTab('reservas')">Reservas</a></li>
+                <li><a onclick="activateTab('contacto')">Contacto</a></li>
+                <li><a href="index.html" style="background: white; color: #7c2d12; padding: 0.5rem 1rem; border-radius: 5px; font-weight: bold;">← Volver</a></li>
+            </ul>
+            <div class="order-btn" onclick="toggleOrder()">
+                🛵
+                <span class="order-count" id="orderCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>🍽️ Restaurante LaVida</h1>
+        <p>Experimenta la mejor cocina moderna con ingredientes frescos y sabor auténtico</p>
+        <div class="hero-info">
+            <div class="info-box">
+                <h3>⏰ Horarios</h3>
+                <p>Mar-Jue: 13:00-23:00<br>Vie-Dom: 13:00-00:00</p>
+            </div>
+            <div class="info-box">
+                <h3>📍 Ubicación</h3>
+                <p>Passeig de Gràcia 25<br>Barcelona, España</p>
+            </div>
+            <div class="info-box">
+                <h3>📞 Contacto</h3>
+                <p>+34 932 000 000<br>info@restaurantlavida.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="activateTab('menu')">🍴 Menú</button>
+            <button class="tab-btn" onclick="activateTab('reservas')">📅 Reservas</button>
+            <button class="tab-btn" onclick="activateTab('contacto')">💬 Contacto</button>
+        </div>
+
+        <!-- TAB: MENÚ -->
+        <div class="tab-content active" id="menu-tab">
+            <div class="menu-grid" id="menuGrid"></div>
+        </div>
+
+        <!-- TAB: RESERVAS -->
+        <div class="tab-content" id="reservas-tab">
+            <div class="reservation-form">
+                <h2 style="margin-bottom: 2rem; text-align: center; color: #DC143C;">Hacer una Reservación</h2>
+                <form onsubmit="enviarReserva(event)">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha">Fecha *</label>
+                            <input type="date" id="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora">Hora *</label>
+                            <input type="time" id="hora" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comensales">Número de Comensales *</label>
+                        <select id="comensales" required>
+                            <option value="">Selecciona</option>
+                            <option value="1">1 Comensal</option>
+                            <option value="2">2 Comensales</option>
+                            <option value="3">3 Comensales</option>
+                            <option value="4">4 Comensales</option>
+                            <option value="5">5 Comensales</option>
+                            <option value="6">6 o más</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="especiales">Indicaciones Especiales</label>
+                        <textarea id="especiales" placeholder="Alergias, preferencias, ocasión especial..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-reserve">Confirmar Reserva</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB: CONTACTO -->
+        <div class="tab-content" id="contacto-tab">
+            <div class="reservation-form">
+                <h2 style="margin-bottom: 2rem; text-align: center; color: #DC143C;">Ponte en Contacto</h2>
+                <form onsubmit="enviarContacto(event)">
+                    <div class="form-group">
+                        <label for="contacto-nombre">Nombre *</label>
+                        <input type="text" id="contacto-nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contacto-email">Email *</label>
+                        <input type="email" id="contacto-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="asunto">Asunto *</label>
+                        <input type="text" id="asunto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje *</label>
+                        <textarea id="mensaje" required style="min-height: 150px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-reserve">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARRITO MODAL -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-content">
+            <div class="order-header">
+                <span>Mi Pedido</span>
+                <button class="close-btn" onclick="toggleOrder()">✕</button>
+            </div>
+            <div class="order-items" id="orderItems"></div>
+            <div class="order-total">
+                <span>Total:</span>
+                <span id="orderTotal">€0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Confirmar Pedido</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="index-demo.html" class="back-link">← Volver a Demos</a>
+        <p>&copy; 2024 Restaurante LaVida. Todos los derechos reservados.</p>
+        <p>🌟 Cocina moderna en un ambiente acogedor</p>
+    </footer>
+
+    <script>
+        // DATOS DEL MENÚ
+        const menu = [
+            { id: 1, nombre: "Ensalada César Premium", precio: 12.99, categoria: "entradas", imagen: "🥗", desc: "Con pollo marinado y croutones caseros", calorias: "250 kcal" },
+            { id: 2, nombre: "Tabla de Quesos y Jamones", precio: 18.99, categoria: "entradas", imagen: "🧀", desc: "Selección ibérica de 6 variedades", calorias: "400 kcal" },
+            { id: 3, nombre: "Sopa de Tomate y Albahaca", precio: 8.99, categoria: "entradas", imagen: "🍲", desc: "Cremosa con crema agria", calorias: "180 kcal" },
+            { id: 4, nombre: "Filete de Salmón a la Mantequilla", precio: 24.99, categoria: "principales", imagen: "🐟", desc: "Con limón y hierbas aromáticas", calorias: "450 kcal" },
+            { id: 5, nombre: "Costilla de Res BBQ", precio: 28.99, categoria: "principales", imagen: "🍖", desc: "Cocción lenta, salsa BBQ casera", calorias: "520 kcal" },
+            { id: 6, nombre: "Pechuga de Pollo Rellena", precio: 16.99, categoria: "principales", imagen: "🍗", desc: "Rellena de champiñones y queso", calorias: "380 kcal" },
+            { id: 7, nombre: "Pasta a la Boloñesa", precio: 13.99, categoria: "principales", imagen: "🍝", desc: "Salsa tradicional italiana, 2h preparación", calorias: "420 kcal" },
+            { id: 8, nombre: "Risotto de Hongos Silvestres", precio: 15.99, categoria: "principales", imagen: "🍚", desc: "Con queso parmesano y trufa negra", calorias: "390 kcal" },
+            { id: 9, nombre: "Helado Gourmet Casero", precio: 7.99, categoria: "postres", imagen: "🍦", desc: "Variedad: Vainilla, chocolate, fresa", calorias: "200 kcal" },
+            { id: 10, nombre: "Tiramisú Clásico", precio: 8.99, categoria: "postres", imagen: "🍰", desc: "Receta tradicional italiana", calorias: "320 kcal" },
+            { id: 11, nombre: "Chocolate Derretido", precio: 9.99, categoria: "postres", imagen: "🍫", desc: "Con helado de vainilla", calorias: "450 kcal" },
+            { id: 12, nombre: "Fruta Fresca de Temporada", precio: 6.99, categoria: "postres", imagen: "🍓", desc: "Selección diaria", calorias: "100 kcal" },
+        ];
+
+        let pedido = [];
+
+        // RENDERIZAR MENÚ
+        function renderizarMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = menu.map(plato => `
+                <div class="menu-card">
+                    <div class="menu-image">${plato.imagen}</div>
+                    <div class="menu-info">
+                        <div class="menu-name">${plato.nombre}</div>
+                        <div class="menu-description">${plato.desc}</div>
+                        <div class="menu-details">
+                            <span>🔥 ${plato.calorias}</span>
+                            <span>${plato.categoria}</span>
+                        </div>
+                        <div class="menu-price">€${plato.precio.toFixed(2)}</div>
+                        <div class="menu-footer">
+                            <button class="btn-add-order" onclick="agregarAlPedido(${plato.id})">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // AGREGAR AL PEDIDO
+        function agregarAlPedido(id) {
+            const plato = menu.find(p => p.id === id);
+            const itemExistente = pedido.find(item => item.id === id);
+            
+            if (itemExistente) {
+                itemExistente.cantidad++;
+            } else {
+                pedido.push({ ...plato, cantidad: 1 });
+            }
+            
+            actualizarPedido();
+            alert(`${plato.nombre} agregado al pedido! 🍴`);
+        }
+
+        // ACTUALIZAR PEDIDO
+        function actualizarPedido() {
+            const orderCount = document.getElementById('orderCount');
+            const orderItems = document.getElementById('orderItems');
+            const orderTotal = document.getElementById('orderTotal');
+            
+            orderCount.textContent = pedido.reduce((sum, item) => sum + item.cantidad, 0);
+            
+            let html = '';
+            let total = 0;
+            
+            pedido.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                html += `
+                    <div class="order-item">
+                        <div>
+                            <div class="order-item-name">${item.nombre}</div>
+                            <small>Cantidad: ${item.cantidad}</small>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="order-item-price">€${subtotal.toFixed(2)}</span>
+                            <button class="remove-item" onclick="removerDelPedido(${item.id})">✕</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            orderItems.innerHTML = html || '<p style="color: #999; text-align: center;">Tu pedido está vacío</p>';
+            orderTotal.textContent = '€' + total.toFixed(2);
+        }
+
+        // REMOVER DEL PEDIDO
+        function removerDelPedido(id) {
+            pedido = pedido.filter(item => item.id !== id);
+            actualizarPedido();
+        }
+
+        // TOGGLE PEDIDO
+        function toggleOrder() {
+            document.getElementById('orderModal').classList.toggle('active');
+        }
+
+        // ACTIVAR TAB
+        function activateTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // ENVIAR RESERVA
+        function enviarReserva(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            const comensales = document.getElementById('comensales').value;
+            
+            alert(`¡Reserva confirmada! 📅\n\nNombre: ${nombre}\nFecha: ${fecha} a las ${hora}\nComensales: ${comensales}\n\nTe enviaremos un email de confirmación.`);
+            document.querySelector('form').reset();
+        }
+
+        // ENVIAR CONTACTO
+        function enviarContacto(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('contacto-nombre').value;
+            const email = document.getElementById('contacto-email').value;
+            
+            alert(`¡Mensaje enviado! 📧\n\nNos pondremos en contacto pronto a ${email}\n\nGracias por comunicarse con nosotros!`);
+            document.querySelector('form').reset();
+        }
+
+        // CHECKOUT
+        function checkout() {
+            if (pedido.length === 0) {
+                alert('Tu pedido está vacío');
+                return;
+            }
+            const total = pedido.reduce((sum, item) => sum + item.precio * item.cantidad, 0).toFixed(2);
+            alert(`¡Pedido confirmado! 🍽️\n\nTotal: €${total}\n\nTiempo de preparación: 30-45 minutos\n\n¡Gracias por tu pedido! 🙏`);
+            pedido = [];
+            actualizarPedido();
+            toggleOrder();
+        }
+
+        // INICIALIZAR
+        renderizarMenu();
+    </script>
+</body>
+</html>
