@@ -2,29 +2,33 @@
    ESTILOS GENERALES Y VARIABLES
    ======================================== */
 
+/* Define variables de colores y estilos que se reutilizan en todo el proyecto */
 :root {
-    --primary-color: #00d9ff;
-    --secondary-color: #7c3aed;
-    --dark-bg: #0a0e27;
-    --darker-bg: #050810;
-    --light-text: #ffffff;
-    --light-gray: #b8bcc4;
-    --card-bg: rgba(15, 19, 45, 0.8);
+    --primary-color: #00d9ff;        /* Color principal: cian brillante */
+    --secondary-color: #7c3aed;      /* Color secundario: púrpura */
+    --dark-bg: #0a0e27;              /* Fondo oscuro */
+    --darker-bg: #050810;            /* Fondo aún más oscuro */
+    --light-text: #ffffff;           /* Texto claro/blanco */
+    --light-gray: #b8bcc4;           /* Gris claro para textos secundarios */
+    --card-bg: rgba(15, 19, 45, 0.8);/* Fondo semi-transparente para tarjetas */
 }
 
+/* Resetea márgenes, paddings y aplica box-sizing a todos los elementos */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;          /* Incluye bordes y padding en el tamaño total */
 }
 
+/* Estilos globales del body */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;                              /* Tipografía principal */
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
     color: var(--light-text);
-    line-height: 1.6;
+    line-height: 1.6;                /* Espaciado entre líneas para mejor legibilidad */
 }
 
+/* Contenedor principal con ancho máximo centrado */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -32,29 +36,32 @@ body {
 }
 
 /* ========================================
-   NAVBAR
+   NAVBAR - Barra de navegación
    ======================================== */
 
+/* Barra de navegación fija en la parte superior */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 14, 39, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 39, 0.95);      /* Fondo semi-transparente */
+    backdrop-filter: blur(10px);             /* Efecto de desenfoque de fondo */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
+    z-index: 1000;                           /* Se mantiene por encima de otros elementos */
     padding: 1rem 0;
 }
 
+/* Contenedor interno de la navbar con distribución flex */
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;          /* Logo a la izquierda, menú a la derecha */
     align-items: center;
 }
 
+/* Estilos del logo */
 .logo {
     display: flex;
     align-items: center;
@@ -65,18 +72,21 @@ body {
     font-size: 1.5rem;
 }
 
+/* Imagen del logo */
 .logo-img {
     width: 40px;
     height: 40px;
 }
 
+/* Texto del logo con gradiente de colores */
 .logo-text {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;          /* Aplica el gradiente al texto */
+    -webkit-text-fill-color: transparent;   /* Hace el texto transparente para ver el gradiente */
     background-clip: text;
 }
 
+/* Menú de navegación - lista de enlaces */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -84,24 +94,28 @@ body {
     align-items: center;
 }
 
+/* Estilos de los enlaces del menú */
 .nav-link {
     color: var(--light-gray);
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s;                  /* Cambio suave de color */
     font-weight: 500;
 }
 
+/* Efecto al pasar el mouse sobre un enlace */
 .nav-link:hover {
     color: var(--primary-color);
 }
 
+/* Botón hamburguesa (menú toggle para móvil) */
 .menu-toggle {
-    display: none;
+    display: none;                           /* Oculto por defecto, visible en móvil */
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
 }
 
+/* Líneas del botón hamburguesa */
 .menu-toggle span {
     width: 25px;
     height: 3px;
@@ -109,6 +123,7 @@ body {
     transition: all 0.3s;
 }
 
+/* Botón principal de llamada a la acción */
 .btn-cta {
     padding: 0.8rem 1.5rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -122,19 +137,22 @@ body {
     display: inline-block;
 }
 
+/* Efecto al pasar el mouse sobre el botón CTA */
 .btn-cta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
+    transform: scale(1.05);                  /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);  /* Añade sombra */
 }
 
+/* Botón CTA en la navbar */
 .nav-cta {
     padding: 0.8rem 1.5rem;
 }
 
 /* ========================================
-   HERO SECTION
+   HERO SECTION - Sección principal/portada
    ======================================== */
 
+/* Sección hero con altura completa */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -142,27 +160,30 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: 60px;
+    margin-top: 60px;                        /* Espacio para la navbar fija */
     padding: 4rem 2rem;
 }
 
+/* Fondo de la sección hero */
 .hero-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -1;                             /* Se coloca detrás del contenido */
 }
 
+/* Esferas con degradado para el efecto visual de fondo */
 .gradient-sphere {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
+    filter: blur(80px);                      /* Desenfoque para efecto suave */
     opacity: 0.3;
-    animation: float 20s infinite ease-in-out;
+    animation: float 20s infinite ease-in-out;  /* Animación de flotación */
 }
 
+/* Primera esfera gradiente (esquina superior derecha) */
 .gradient-1 {
     width: 400px;
     height: 400px;
@@ -172,6 +193,7 @@ body {
     animation-delay: 0s;
 }
 
+/* Segunda esfera gradiente (parte inferior izquierda) */
 .gradient-2 {
     width: 300px;
     height: 300px;
@@ -181,6 +203,7 @@ body {
     animation-delay: 2s;
 }
 
+/* Tercera esfera gradiente (parte inferior derecha) */
 .gradient-3 {
     width: 350px;
     height: 350px;
@@ -190,31 +213,35 @@ body {
     animation-delay: 4s;
 }
 
+/* Animación de flotación para las esferas */
 @keyframes float {
     0%, 100% {
-        transform: translateY(0px) translateX(0px);
+        transform: translateY(0px) translateX(0px);  /* Posición inicial */
     }
     50% {
-        transform: translateY(-50px) translateX(30px);
+        transform: translateY(-50px) translateX(30px);  /* Movimiento en el medio */
     }
 }
 
+/* Canvas para animación de partículas */
 #particleCanvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1;                              /* Encima del fondo, debajo del contenido */
 }
 
+/* Contenido principal del hero */
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 2;                              /* Por encima de todo */
     text-align: center;
     max-width: 800px;
 }
 
+/* Título principal del hero */
 .hero-title {
     font-size: 3.5rem;
     font-family: 'Poppins', sans-serif;
@@ -223,6 +250,7 @@ body {
     line-height: 1.2;
 }
 
+/* Efecto de destacado con gradiente */
 .highlight {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
@@ -230,6 +258,7 @@ body {
     background-clip: text;
 }
 
+/* Subtítulo del hero */
 .hero-subtitle {
     font-size: 1.3rem;
     color: var(--light-gray);
@@ -237,14 +266,16 @@ body {
     line-height: 1.8;
 }
 
+/* Contenedor de botones del hero */
 .hero-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
     margin-bottom: 3rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap;                         /* Los botones se ajustan en móvil */
 }
 
+/* Botón primario del hero */
 .btn-primary {
     padding: 1rem 2rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -257,14 +288,16 @@ body {
     font-size: 1rem;
 }
 
+/* Efecto al pasar el mouse sobre botón primario */
 .btn-primary:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
 }
 
+/* Botón secundario del hero (con borde) */
 .btn-secondary {
     padding: 1rem 2rem;
-    background: transparent;
+    background: transparent;                 /* Sin relleno, solo borde */
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     border-radius: 8px;
@@ -274,20 +307,23 @@ body {
     font-size: 1rem;
 }
 
+/* Efecto al pasar el mouse sobre botón secundario */
 .btn-secondary:hover {
-    background: rgba(0, 217, 255, 0.1);
+    background: rgba(0, 217, 255, 0.1);     /* Fondo ligero */
     transform: scale(1.05);
 }
 
+/* Estadísticas en el hero */
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);  /* 3 columnas */
     gap: 2rem;
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Elemento individual de estadística */
 .stat {
     display: flex;
     flex-direction: column;
@@ -295,6 +331,7 @@ body {
     gap: 0.5rem;
 }
 
+/* Número de la estadística */
 .stat-number {
     font-size: 2.5rem;
     font-weight: 800;
@@ -304,6 +341,7 @@ body {
     background-clip: text;
 }
 
+/* Etiqueta de la estadística */
 .stat-label {
     color: var(--light-gray);
     font-size: 0.95rem;
@@ -313,15 +351,18 @@ body {
    SECCIONES GENERALES
    ======================================== */
 
+/* Padding estándar para todas las secciones */
 section {
     padding: 5rem 2rem;
 }
 
+/* Encabezado de sección */
 .section-header {
     text-align: center;
     margin-bottom: 4rem;
 }
 
+/* Título de sección */
 .section-title {
     font-size: 2.5rem;
     font-family: 'Poppins', sans-serif;
@@ -333,6 +374,7 @@ section {
     font-weight: 700;
 }
 
+/* Descripción de sección */
 .section-description {
     font-size: 1.1rem;
     color: var(--light-gray);
@@ -341,19 +383,22 @@ section {
 }
 
 /* ========================================
-   SERVICIOS SECTION
+   SERVICIOS SECTION - Sección de servicios
    ======================================== */
 
+/* Fondo de la sección servicios con gradiente sutil */
 .servicios {
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
 }
 
+/* Grid de servicios (se adapta automáticamente) */
 .servicios-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));  /* Mínimo 350px por tarjeta */
     gap: 2rem;
 }
 
+/* Tarjeta de servicio */
 .service-card {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -362,12 +407,14 @@ section {
     transition: all 0.3s;
 }
 
+/* Efecto al pasar el mouse sobre tarjeta de servicio */
 .service-card:hover {
     border-color: var(--primary-color);
-    transform: translateY(-10px);
+    transform: translateY(-10px);            /* Se eleva */
     box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
 }
 
+/* Icono de servicio */
 .service-icon {
     width: 50px;
     height: 50px;
@@ -379,12 +426,14 @@ section {
     margin-bottom: 1rem;
 }
 
+/* SVG dentro del icono */
 .service-icon svg {
     width: 30px;
     height: 30px;
     color: var(--dark-bg);
 }
 
+/* Título de la tarjeta de servicio */
 .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -392,18 +441,21 @@ section {
     font-family: 'Poppins', sans-serif;
 }
 
+/* Párrafo en tarjeta de servicio */
 .service-card p {
     color: var(--light-gray);
     margin-bottom: 1.5rem;
     line-height: 1.8;
 }
 
+/* Características/etiquetas del servicio */
 .service-features {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
 }
 
+/* Etiqueta individual de característica */
 .feature-tag {
     background: rgba(0, 217, 255, 0.1);
     color: var(--primary-color);
@@ -414,136 +466,151 @@ section {
 }
 
 /* ========================================
-   CTA & CONTACTO SECTION
+   FORMULARIO DE CONTACTO
    ======================================== */
 
-.cta-section {
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* Sección de formulario */
+.contact-section {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%);
 }
 
-.cta-content {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 3rem;
+/* Contenedor del formulario */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.cta-content h2 {
-    font-size: 2.5rem;
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.cta-content p {
-    font-size: 1.1rem;
-    color: var(--light-gray);
-    margin-bottom: 2rem;
-}
-
+/* Formulario de contacto con grid de 2 columnas */
 .contact-form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
 
+/* Grupo de formulario (cada campo) */
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
+/* Label del formulario */
 .form-group label {
-    margin-bottom: 0.5rem;
-    color: var(--light-gray);
+    color: var(--light-text);
     font-weight: 500;
+    font-size: 0.95rem;
 }
 
+/* Inputs y textareas */
 .form-group input,
 .form-group select,
 .form-group textarea {
-    padding: 0.8rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
+    padding: 0.8rem;
     color: var(--light-text);
     font-family: 'Inter', sans-serif;
     transition: all 0.3s;
 }
 
+/* Enfoque en inputs */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
 }
 
+/* Textarea ocupa 2 columnas */
 .form-group textarea {
-    resize: vertical;
     grid-column: 1 / -1;
+    resize: vertical;
+    min-height: 150px;
 }
 
+/* Checkbox del formulario */
 .form-group.checkbox {
+    grid-column: 1 / -1;
     flex-direction: row;
     align-items: center;
-    gap: 0.5rem;
-    grid-column: 1 / -1;
+    gap: 0.8rem;
 }
 
 .form-group.checkbox input {
-    width: auto;
-    padding: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .form-group.checkbox label {
-    margin-bottom: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--light-gray);
 }
 
+/* Botón de envío del formulario */
 .btn-large {
-    padding: 1rem 2rem;
-    font-size: 1.05rem;
     grid-column: 1 / -1;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
 }
 
-.form-message {
-    grid-column: 1 / -1;
-    color: var(--primary-color);
+/* Efecto al pasar el mouse sobre botón grande */
+.btn-large:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
+}
+
+/* Mensaje de confirmación del formulario */
+#formMessage {
+    margin-top: 1rem;
     text-align: center;
-    min-height: 1.5rem;
+    font-weight: 500;
+    min-height: 20px;
 }
 
 /* ========================================
    METODOLOGÍA SECTION
    ======================================== */
 
+/* Sección de metodología */
 .metodologia {
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
 }
 
+/* Grid de metodología */
 .metodologia-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
 
+/* Tarjeta de método */
 .metodo-card {
-    text-align: center;
-    padding: 2rem;
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
+    padding: 2rem;
     transition: all 0.3s;
 }
 
+/* Efecto al pasar el mouse sobre tarjeta de método */
 .metodo-card:hover {
     border-color: var(--primary-color);
     transform: translateY(-10px);
     box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
 }
 
+/* Número del método */
 .metodo-number {
     font-size: 3rem;
     font-weight: 800;
@@ -554,6 +621,7 @@ section {
     margin-bottom: 1rem;
 }
 
+/* Título de la tarjeta de método */
 .metodo-card h3 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
@@ -561,25 +629,29 @@ section {
     font-family: 'Poppins', sans-serif;
 }
 
+/* Párrafo en tarjeta de método */
 .metodo-card p {
     color: var(--light-gray);
     line-height: 1.8;
 }
 
 /* ========================================
-   PORTFOLIO SECTION
+   PORTFOLIO SECTION - Sección de portafolio
    ======================================== */
 
+/* Fondo de portfolio con gradiente sutil */
 .portfolio {
     background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%);
 }
 
+/* Grid de portfolio */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
+/* Item de portfolio */
 .portfolio-item {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -589,12 +661,14 @@ section {
     cursor: pointer;
 }
 
+/* Efecto al pasar el mouse sobre item de portfolio */
 .portfolio-item:hover {
     border-color: var(--primary-color);
     transform: translateY(-10px);
     box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
 }
 
+/* Imagen del portfolio */
 .portfolio-image {
     width: 100%;
     height: 200px;
@@ -605,10 +679,12 @@ section {
     font-size: 3rem;
 }
 
+/* Contenido del portfolio */
 .portfolio-content {
     padding: 2rem;
 }
 
+/* Título del portfolio */
 .portfolio-content h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
@@ -616,6 +692,7 @@ section {
     font-family: 'Poppins', sans-serif;
 }
 
+/* Descripción del portfolio */
 .portfolio-content p {
     color: var(--light-gray);
     font-size: 0.95rem;
@@ -623,12 +700,14 @@ section {
     line-height: 1.6;
 }
 
+/* Contenedor de etiquetas del portfolio */
 .portfolio-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
+/* Etiqueta individual del portfolio */
 .portfolio-tag {
     background: rgba(0, 217, 255, 0.1);
     color: var(--primary-color);
@@ -639,19 +718,22 @@ section {
 }
 
 /* ========================================
-   PRECIOS SECTION
+   PRECIOS SECTION - Sección de precios
    ======================================== */
 
+/* Fondo de sección de precios */
 .precios {
     background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
 }
 
+/* Grid de tarjetas de precios */
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
 }
 
+/* Tarjeta de precio */
 .pricing-card {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -662,22 +744,26 @@ section {
     overflow: hidden;
 }
 
+/* Tarjeta de precio destacada */
 .pricing-card.featured {
     border-color: var(--primary-color);
     box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
-    transform: scale(1.05);
+    transform: scale(1.05);                  /* Ligeramente más grande */
 }
 
+/* Efecto al pasar el mouse sobre tarjeta de precio */
 .pricing-card:hover {
     border-color: var(--primary-color);
     transform: translateY(-10px);
     box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
 }
 
+/* Encabezado de tarjeta de precio */
 .pricing-header {
     margin-bottom: 2rem;
 }
 
+/* Título de tarjeta de precio */
 .pricing-header h3 {
     font-size: 1.5rem;
     color: var(--primary-color);
@@ -685,11 +771,13 @@ section {
     margin-bottom: 0.5rem;
 }
 
+/* Descripción de tarjeta de precio */
 .pricing-desc {
     color: var(--light-gray);
     font-size: 0.95rem;
 }
 
+/* Precio en la tarjeta */
 .pricing-price {
     margin-bottom: 2rem;
     display: flex;
@@ -697,11 +785,13 @@ section {
     gap: 0.5rem;
 }
 
+/* Símbolo de moneda */
 .currency {
     font-size: 1.2rem;
     color: var(--primary-color);
 }
 
+/* Cantidad del precio */
 .amount {
     font-size: 2.5rem;
     font-weight: 800;
@@ -709,11 +799,13 @@ section {
     font-family: 'Poppins', sans-serif;
 }
 
+/* Período del precio (por mes, año, etc.) */
 .period {
     color: var(--light-gray);
     font-size: 0.95rem;
 }
 
+/* Lista de características de precio */
 .pricing-features {
     list-style: none;
     margin-bottom: 2rem;
@@ -722,12 +814,14 @@ section {
     gap: 0.8rem;
 }
 
+/* Elemento de la lista de características */
 .pricing-features li {
     color: var(--light-gray);
     padding-left: 1.5rem;
     position: relative;
 }
 
+/* Marca de verificación antes de cada característica */
 .pricing-features li::before {
     content: '✓';
     position: absolute;
@@ -736,6 +830,7 @@ section {
     font-weight: bold;
 }
 
+/* Botón de precio */
 .btn-pricing {
     width: 100%;
     padding: 1rem;
@@ -749,15 +844,17 @@ section {
     font-size: 1rem;
 }
 
+/* Efecto al pasar el mouse sobre botón de precio */
 .btn-pricing:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
 }
 
 /* ========================================
-   FOOTER
+   FOOTER - Pie de página
    ======================================== */
 
+/* Contenedor del footer */
 .footer {
     background: rgba(5, 8, 16, 0.8);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -765,6 +862,7 @@ section {
     color: var(--light-gray);
 }
 
+/* Contenido del footer en grid */
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -772,18 +870,21 @@ section {
     margin-bottom: 3rem;
 }
 
+/* Encabezado de columna del footer */
 .footer-column h4 {
     color: var(--light-text);
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
 
+/* Párrafo en columna del footer */
 .footer-column p {
     line-height: 1.8;
     margin-bottom: 1.5rem;
     color: var(--light-gray);
 }
 
+/* Lista en columna del footer */
 .footer-column ul {
     list-style: none;
     display: flex;
@@ -791,21 +892,25 @@ section {
     gap: 0.8rem;
 }
 
+/* Enlace en columna del footer */
 .footer-column a {
     color: var(--light-gray);
     text-decoration: none;
     transition: color 0.3s;
 }
 
+/* Efecto al pasar el mouse sobre enlace del footer */
 .footer-column a:hover {
     color: var(--primary-color);
 }
 
+/* Contenedor de enlaces sociales */
 .social-links {
     display: flex;
     gap: 1rem;
 }
 
+/* Enlace de red social */
 .social-link {
     width: 40px;
     height: 40px;
@@ -821,34 +926,39 @@ section {
     cursor: pointer;
 }
 
+/* Efecto al pasar el mouse sobre enlace social */
 .social-link:hover {
     background: rgba(0, 217, 255, 0.2);
     border-color: var(--primary-color);
     transform: translateY(-3px);
 }
 
+/* Parte inferior del footer */
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2rem;
     text-align: center;
 }
 
+/* Párrafo en footer-bottom */
 .footer-bottom p {
     color: var(--light-gray);
     font-size: 0.9rem;
 }
 
 /* ========================================
-   ANIMACIONES Y UTILITIES
+   ANIMACIONES Y UTILITIES - Efectos y clases auxiliares
    ======================================== */
 
+/* Clases para animación al hacer scroll */
 .reveal-text,
 .reveal-fade,
 .reveal-card {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;                              /* Invisible inicialmente */
+    animation: fadeInUp 0.8s ease-out forwards;  /* Animación de entrada */
 }
 
+/* Retrasos diferentes para cada tipo de reveal */
 .reveal-text {
     animation-delay: 0.2s;
 }
@@ -861,31 +971,36 @@ section {
     animation-delay: 0.6s;
 }
 
+/* Animación de fade in hacia arriba */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(30px);         /* Empieza 30px hacia abajo */
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0);            /* Termina en posición normal */
     }
 }
 
 /* ========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - Diseño adaptable
    ======================================== */
 
+/* Estilos para pantallas medianas y pequeñas (máx 768px) */
 @media (max-width: 768px) {
+    /* Navbar adaptada para móvil */
     .navbar-container {
         flex-direction: column;
         gap: 1rem;
     }
 
+    /* Mostrar botón hamburguesa en móvil */
     .menu-toggle {
         display: flex;
     }
 
+    /* Menú de navegación oculto por defecto */
     .nav-menu {
         display: none;
         width: 100%;
@@ -896,32 +1011,38 @@ section {
         border-radius: 8px;
     }
 
+    /* Mostrar menú cuando está activo */
     .nav-menu.active {
         display: flex;
     }
 
+    /* Ajustar hero en móvil */
     .hero {
         margin-top: 100px;
         padding: 2rem 1rem;
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 2rem;                     /* Título más pequeño */
     }
 
+    /* Botones apilados en móvil */
     .hero-buttons {
         flex-direction: column;
     }
 
+    /* Una columna para estadísticas en móvil */
     .hero-stats {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
 
+    /* Título de sección más pequeño */
     .section-title {
         font-size: 2rem;
     }
 
+    /* Grids con una columna en móvil */
     .servicios-grid,
     .metodologia-grid,
     .portfolio-grid,
@@ -929,38 +1050,47 @@ section {
         grid-template-columns: 1fr;
     }
 
+    /* Tarjeta destacada sin escala en móvil */
     .pricing-card.featured {
         transform: scale(1);
     }
 
+    /* Formulario en una columna en móvil */
     .contact-form {
         grid-template-columns: 1fr;
     }
 
+    /* Textarea y button ocupan una columna */
     .form-group textarea,
     .form-group.checkbox,
     .btn-large {
         grid-column: 1;
     }
 
+    /* Estadísticas en una columna */
     .hero-stats {
         grid-template-columns: 1fr;
     }
 }
 
+/* Estilos para pantallas muy pequeñas (máx 480px) */
 @media (max-width: 480px) {
+    /* Título del hero muy pequeño */
     .hero-title {
         font-size: 1.5rem;
     }
 
+    /* Título de sección muy pequeño */
     .section-title {
         font-size: 1.5rem;
     }
 
+    /* Título de tarjeta de servicio pequeño */
     .service-card h3 {
         font-size: 1.3rem;
     }
 
+    /* Menú con menos espaciado */
     .nav-menu {
         gap: 0.5rem;
     }
